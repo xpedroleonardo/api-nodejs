@@ -12,11 +12,15 @@ export class Exemple1641339635290 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: "nome",
+            name: "name",
             type: "varchar",
           },
           {
-            name: "idade",
+            name: "age",
+            type: "varchar",
+          },
+          {
+            name: "username",
             type: "varchar",
           },
           {
