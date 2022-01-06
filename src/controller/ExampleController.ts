@@ -20,6 +20,7 @@ export const deleteExample = async (req: Request, res: Response) => {
 
 export const createExample = async (req: Request, res: Response) => {
   const { name, age, username } = req.body;
+  const avatar = req.file.filename;
 
   const example = await getRepository(Example).save({ name, age, username });
   return res.json({ createdUser: example, message: "Successfully created!" });
