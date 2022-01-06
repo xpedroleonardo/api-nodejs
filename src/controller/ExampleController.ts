@@ -29,6 +29,7 @@ export const createExample = async (req: Request, res: Response) => {
 export const updateExample = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, age, username } = req.body;
+  const avatar = req.file.filename;
 
   const example = await getRepository(Example).update(id, {
     name,

@@ -24,6 +24,10 @@ export class Example1641339635290 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "avatar",
+            type: "varchar",
+          },
+          {
             name: "created_at",
             type: "datetime",
           },

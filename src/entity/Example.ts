@@ -20,6 +20,9 @@ export class Example {
   @Column()
   username: string;
 
+  @Column()
+  avatar: string;
+
   @CreateDateColumn()
   created_at: Date;
 
