@@ -12,10 +12,13 @@ export class Example {
   id: number;
 
   @Column()
-  nome: string;
+  name: string;
 
   @Column()
-  idade: number;
+  age: number;
+
+  @Column()
+  username: string;
 
   @CreateDateColumn()
   created_at: Date;
