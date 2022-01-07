@@ -9,6 +9,8 @@ export const deleteExample = async (req: Request, res: Response) => {
   const { id } = req.params;
   let message: string;
 
+  deleteImage(id);
+
   const example = await getRepository(Example).delete(id);
 
   if (example.affected === 1) {
@@ -38,11 +40,7 @@ export const updateExample = async (req: Request, res: Response) => {
   const { name, age, username } = req.body;
   const avatar = req.file.filename;
 
-  const removeImage = await getRepository(Example).findOne(id);
-  unlink(path.resolve(__dirname, "..", "images", removeImage.avatar), (err) => {
-    if (err) throw err;
-    console.log(`images/${removeImage.avatar} was deleted`);
-  });
+  deleteImage(id);
 
   const example = await getRepository(Example).update(id, {
     name,
@@ -84,4 +82,11 @@ export const selectExample = async (req: Request, res: Response) => {
   }
 
   return res.json(example);
+};
+
+const deleteImage = async (id: string) => {
+  const { avatar } = await getRepository(Example).findOne(id);
+  unlink(path.resolve(__dirname, "..", "images", avatar), (err) => {
+    if (err) throw err;
+  });
 };

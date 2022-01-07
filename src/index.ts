@@ -12,4 +12,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(route);
 
-app.listen(3333, () => console.log("Runnig in http://localhost:3333"));
+app.listen(3333, () => console.log("http://localhost:3333"));
