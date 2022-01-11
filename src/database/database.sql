@@ -1,1 +1,1 @@
-CREATE DATABASE api;
+CREATE DATABASE apinodejs;
