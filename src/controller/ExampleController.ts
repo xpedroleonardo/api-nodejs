@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { Request, Response } from "express";
 import { unlink } from "fs";
+import { hash } from "bcryptjs";
 import path from "path";
 
 import { Example } from "../entity/Example";
@@ -23,27 +24,45 @@ export const deleteExample = async (req: Request, res: Response) => {
 };
 
 export const createExample = async (req: Request, res: Response) => {
-  const { name, age, username } = req.body;
+  const { name, email, password, age, username } = req.body;
   const avatar = req.file.filename;
+
+  const passwordHash = await hash(password, 8);
+
+  const userAlreadyExist = await getRepository(Example).findOne({
+    email,
+    username,
+  });
+
+  if (userAlreadyExist) {
+    throw new Error("User already exists!");
+  }
 
   const example = await getRepository(Example).save({
     name,
+    email,
+    password: passwordHash,
     age,
     username,
     avatar,
   });
+
   return res.json({ created_user: example, message: "Successfully created!" });
 };
 
 export const updateExample = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, age, username } = req.body;
+  const { name, email, password, age, username } = req.body;
   const avatar = req.file.filename;
 
   deleteImage(id);
 
+  const passwordHash = await hash(password, 8);
+
   const example = await getRepository(Example).update(id, {
     name,
+    email,
+    password: passwordHash,
     age,
     username,
     avatar,
@@ -82,6 +101,15 @@ export const selectExample = async (req: Request, res: Response) => {
   }
 
   return res.json(example);
+};
+
+export const authenticateExample = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  // const authenticateUserService = new AuthenticateUserService();
+  // const token = await authenticateUserService.execute({ email, password });
+
+  // return res.json(token);
 };
 
 const deleteImage = async (id: string) => {

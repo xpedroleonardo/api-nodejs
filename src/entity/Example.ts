@@ -15,6 +15,12 @@ export class Example {
   name: string;
 
   @Column()
+  email: string;
+
+  @Column()
+  password: string;
+
+  @Column()
   age: number;
 
   @Column()

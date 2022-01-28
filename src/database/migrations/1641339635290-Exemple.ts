@@ -16,6 +16,14 @@ export class Example1641339635290 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "email",
+            type: "varchar",
+          },
+          {
+            name: "password",
+            type: "varchar",
+          },
+          {
             name: "age",
             type: "varchar",
           },
