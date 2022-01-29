@@ -4,6 +4,7 @@ import multer from "multer";
 const route = Router();
 
 import {
+  authenticateExample,
   createExample,
   deleteExample,
   selectExample,
@@ -19,7 +20,7 @@ route.get("/details/:id", selectOneExample); //List One
 route.put("/update/:id", multer(multerConfig).single("avatar"), updateExample); //Update
 route.delete("/delete/:id", deleteExample); //Delete
 
-route.post("/auth/"); //Create Auth
+route.post("/auth/", authenticateExample); //Create Auth
 route.get("/auth/"); //List Auth
 
 export default route;

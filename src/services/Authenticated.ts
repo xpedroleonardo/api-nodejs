@@ -4,20 +4,18 @@ import { sign } from "jsonwebtoken";
 import { Example } from "../entity/Example";
 
 interface AuthParams {
-  emailAuth: string;
-  passAuth: string;
+  email: string;
+  password: string;
 }
 
-export const authUserService = async ({ emailAuth, passAuth }: AuthParams) => {
-  const { id, email, password } = await getRepository(Example).findOne(
-    emailAuth
-  );
+export const authUserService = async ({ email, password }: AuthParams) => {
+  const user = await getRepository(Example).findOne({ email: email });
 
-  if (!email) {
+  if (!user) {
     throw new Error("Email/Password incorrect!");
   }
 
-  const passwordMatch = await compare(passAuth, password);
+  const passwordMatch = await compare(password, user.password);
 
   if (!passwordMatch) {
     throw new Error("Email/Password incorrect!");
@@ -29,7 +27,7 @@ export const authUserService = async ({ emailAuth, passAuth }: AuthParams) => {
     },
     "ffhanku-dfjnasdk",
     {
-      subject: JSON.stringify(id),
+      subject: JSON.stringify(user.id),
       expiresIn: "1d",
     }
   );

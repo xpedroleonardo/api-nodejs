@@ -5,6 +5,7 @@ import { hash } from "bcryptjs";
 import path from "path";
 
 import { Example } from "../entity/Example";
+import { authUserService } from "../services/Authenticated";
 
 export const deleteExample = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -106,10 +107,9 @@ export const selectExample = async (req: Request, res: Response) => {
 export const authenticateExample = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  // const authenticateUserService = new AuthenticateUserService();
-  // const token = await authenticateUserService.execute({ email, password });
+  const token = await authUserService({ email, password });
 
-  // return res.json(token);
+  return res.json({ token });
 };
 
 const deleteImage = async (id: string) => {
