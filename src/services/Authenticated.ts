@@ -25,7 +25,7 @@ export const authUserService = async ({ email, password }: AuthParams) => {
     {
       email: email,
     },
-    "ffhanku-dfjnasdk",
+    "exampleapijwtoken",
     {
       subject: JSON.stringify(user.id),
       expiresIn: "1d",

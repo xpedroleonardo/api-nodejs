@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 
 interface IPayLoad {
-  sub: string;
+  id_token: string;
 }
 
 export function ensureAuthenticated(
@@ -23,9 +23,9 @@ export function ensureAuthenticated(
   }
 
   try {
-    const { sub } = verify(token, process.env.JWT_SECRET) as IPayLoad;
+    const { id_token } = verify(token, process.env.JWT_SECRET) as IPayLoad;
 
-    req.user_id = sub;
+    req.id_auth = id_token;
 
     return next();
   } catch (error) {

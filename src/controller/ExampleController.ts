@@ -36,7 +36,7 @@ export const createExample = async (req: Request, res: Response) => {
   });
 
   if (userAlreadyExist) {
-    throw new Error("User already exists!");
+    return res.json({ message: "User already exists!" });
   }
 
   const example = await getRepository(Example).save({
