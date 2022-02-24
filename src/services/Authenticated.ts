@@ -12,20 +12,20 @@ export const authUserService = async ({ email, password }: AuthParams) => {
   const user = await getRepository(Example).findOne({ email: email });
 
   if (!user) {
-    throw new Error("Email/Password incorrect!");
+    return false;
   }
 
   const passwordMatch = await compare(password, user.password);
 
   if (!passwordMatch) {
-    throw new Error("Email/Password incorrect!");
+    return false;
   }
 
   const token = sign(
     {
       email: email,
     },
-    "exampleapijwtoken",
+    process.env.JWT_SECRET,
     {
       subject: JSON.stringify(user.id),
       expiresIn: "1d",

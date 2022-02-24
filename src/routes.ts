@@ -20,6 +20,6 @@ route.post("/create", multer(multerConfig).single("avatar"), createExample); //C
 route.get("/details/:id", selectOneExample); //List One
 route.put("/update/:id", multer(multerConfig).single("avatar"), updateExample); //Update
 route.delete("/delete/:id", ensureAuthenticated, deleteExample); //Delete
-route.post("/auth/", authenticateExample); //Create Auth
+route.post("/auth", authenticateExample); //Create Auth
 
 export default route;

@@ -113,7 +113,7 @@ export const selectExample = async (req: Request, res: Response) => {
   });
 
   if (example.length === 0) {
-    return res.json({ message: "No data in database!" });
+    return res.json({ message: "No records in the database!" });
   }
 
   return res.json(example);
@@ -123,6 +123,10 @@ export const authenticateExample = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   const token = await authUserService({ email, password });
+
+  if (token == false) {
+    return res.json({ message: "Email/Password incorrect! false" });
+  }
 
   return res.json({ token, message: "User Authenticated!" });
 };
