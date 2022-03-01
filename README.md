@@ -44,7 +44,15 @@ Após a criação do banco de dados você deverá acessar o arquivo <b>ormconfig
 }
 ```
 
-Para iniciá-lo, siga os passos abaixo:
+Após realizar as configurações do banco de dados, renomeie o arquivo <b>.env.example</b> para <b>.env</b>, e digte a sua palavra secreta, para que a geração do token <b>JWT</b> funcione corretamente.
+
+```env
+
+JWT_SECRET=SUA_PALAVRA_SECRETA
+
+```
+
+Para iniciar o projeto, siga os passos abaixo:
 
 ### Utilizando Yarn
 
